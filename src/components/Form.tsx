@@ -1,6 +1,24 @@
+import { useState } from "react";
+
 import { categories } from "../data/categories";
 
 const Form = () => {
+  const [activity, setActivity] = useState({
+    category: 1,
+    name: "",
+    calories: 0,
+  });
+
+  const handleChange = (e) => {
+    const keyObj: string = e?.target?.name ?? "";
+    const value: string = e?.target?.value ?? "";
+
+    setActivity({
+      ...activity,
+      [keyObj]: value,
+    });
+  };
+
   return (
     <form action="" className="space-y-5 bg-white shadow p-10 rounded-lg">
       <div className="grid grid-cols-1 gap-3">
@@ -8,9 +26,11 @@ const Form = () => {
           Category
         </label>
         <select
-          name=""
+          name="category"
           id="Category"
           className="border border-slate-300 p-2 rounded-lg w-full bg-white"
+          value={activity.category}
+          onChange={handleChange}
         >
           {categories.map((category) => (
             <option value={category?.id} key={category.id}>
@@ -21,14 +41,17 @@ const Form = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-3">
-        <label htmlFor="activity" className="font-bold">
+        <label htmlFor="name" className="font-bold">
           Activity
         </label>
         <input
           type="text"
-          id="activity"
+          name="name"
+          id="name"
           className="border border-slate-300 p-2 rounded-lg"
           placeholder="food, apple, salad vegtables"
+          value={activity.name}
+          onChange={handleChange}
         />
       </div>
 
@@ -37,10 +60,13 @@ const Form = () => {
           Calories
         </label>
         <input
+          name="calories"
           type="number"
           id="calories"
           className="border border-slate-300 p-2 rounded-lg"
           placeholder="300 calories"
+          value={activity.calories}
+          onChange={handleChange}
         />
       </div>
 

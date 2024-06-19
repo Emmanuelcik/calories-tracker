@@ -27,7 +27,7 @@ const ActivityList = ({ activities, dispatch }: ActivityListProps) => {
         activities.map((activity) => (
           <div
             key={activity.id}
-            className="px-5 py-10 bg-white mt-5 flex justify-between"
+            className="px-5 py-10 bg-white mt-5 flex justify-between shadow"
           >
             <div className="space-y2 relative">
               <p

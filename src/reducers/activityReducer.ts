@@ -5,7 +5,8 @@ export type ActivityActions =
       type: "save-activity";
       payload: { newActivity: Activity };
     }
-  | { type: "set-activeId"; payload: { activeId: Activity["id"] } };
+  | { type: "set-activeId"; payload: { activeId: Activity["id"] } }
+  | { type: "delete-activity"; payload: { activityId: Activity["id"] } };
 
 export type ActivityState = {
   activities: Activity[];
@@ -42,6 +43,17 @@ export const activityReducer = (
     return {
       ...state,
       activeId: action.payload.activeId,
+    };
+  }
+
+  if (action.type === "delete-activity") {
+    const newActivities: Activity[] = state.activities.filter(
+      (act) => act.id !== action.payload.activityId
+    );
+
+    return {
+      ...state,
+      activities: newActivities,
     };
   }
 };

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useReducer } from "react";
 import Form from "./components/Form";
 import { activityReducer, initialState } from "./reducers/activityReducer";
 import ActivityList from "./components/ActivityList";
+import CaloryTracker from "./components/CaloryTracker";
 
 function App() {
   const [state, dispatch] = useReducer(activityReducer, initialState);
@@ -11,7 +12,7 @@ function App() {
   }, [state?.activities]);
 
   const canRestartApp = useMemo(
-    () => state?.activities?.length > 0,
+    () => (state?.activities ?? []).length > 0,
     [state?.activities]
   );
 
@@ -34,7 +35,13 @@ function App() {
 
       <section className="bg-lime-500 py-20 px-5">
         <div className="max-w-4xl mx-auto">
-          <Form dispatch={dispatch} state={state} />
+          <Form dispatch={dispatch} state={state ?? initialState} />
+        </div>
+      </section>
+
+      <section className="bg-gray-800 py-10">
+        <div className="max-w-4xl mx-auto">
+          <CaloryTracker activities={state?.activities} />
         </div>
       </section>
 

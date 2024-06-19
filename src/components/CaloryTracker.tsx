@@ -23,6 +23,11 @@ const CaloryTracker = ({ activities }: CaloryTrackerProps) => {
       ),
     [activities]
   );
+
+  const totalCalories = useMemo(
+    () => caloriesConsumed - caloriesBurned,
+    [activities]
+  );
   return (
     <>
       <h2 className="text-4xl font-black text-white text-center">
@@ -31,6 +36,7 @@ const CaloryTracker = ({ activities }: CaloryTrackerProps) => {
       <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
         <CaloryDisplay calories={caloriesConsumed} text="Consumed" />
         <CaloryDisplay calories={caloriesBurned} text="Burned" />
+        <CaloryDisplay calories={totalCalories} text="Difference" />
       </div>
     </>
   );

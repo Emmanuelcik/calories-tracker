@@ -1,4 +1,4 @@
-import { Dispatch, useCallback, useMemo } from "react";
+import { Dispatch, useCallback } from "react";
 import { categories } from "../data/categories";
 import { Activity } from "../types";
 import { PencilSquareIcon, XCircleIcon } from "@heroicons/react/24/outline";
